@@ -1,0 +1,156 @@
+
+{% include 'header.html' %}
+    <script type="text/javascript">
+    var dataTable = [
+        {
+			'reference':'Điều 1 Khoản 1',
+			'title':'title của đoạn văn 1',
+			'content':'Trong phần thảo luận, các đại biểu tham dự hội thảo đã đánh giá về thực trạng công tác quản lý rủi ro hiện đang triển khai ở Việt Nam;',
+			'score':0.92
+		},
+        {
+			'reference': 'Điều 2 Khoản 2',
+			'title': 'title của đoạn văn 2',
+			'content': 'nội dung đoạn văn 2',
+			'score': 0.92}
+        ,
+		{
+			'reference':'Điều 3 Khoản 3',
+			'title':'title của đoạn văn 3',
+			'content':'nội dung đoạn văn 3',
+			'score':0.92
+		},
+		{
+			'reference':'Điều 3 Khoản 4',
+			'title':'title của đoạn văn 4',
+			'content':'nội dung đoạn văn 4',
+			'score':0.92
+		},
+		{
+			'reference':'Điều 3 Khoản 5',
+			'title':'title của đoạn văn 5',
+			'content':'nội dung đoạn văn 5',
+			'score':0.92
+		},
+		{
+			'reference':'Điều 3 Khoản 3',
+			'title':'title của đoạn văn 3',
+			'content':'nội dung đoạn văn 3',
+			'score':0.92
+		},
+		{
+			'reference':'Điều 3 Khoản 3',
+			'title':'title của đoạn văn 3',
+			'content':'nội dung đoạn văn 3',
+			'score':0.92
+		},
+		{
+			'reference':'Điều 3 Khoản 3',
+			'title':'title của đoạn văn 3',
+			'content':'nội dung đoạn văn 3',
+			'score':0.92
+		},
+		{
+			'reference':'Điều 3 Khoản 3',
+			'title':'title của đoạn văn 3',
+			'content':'nội dung đoạn văn 3',
+			'score':0.92
+		},
+		{
+			'reference':'Điều 3 Khoản 3',
+			'title':'title của đoạn văn 3',
+			'content':'nội dung đoạn văn 3',
+			'score':0.92
+		}];
+    </script>
+    <div class="container">
+            <table class="table">
+                <tr>
+                    <td width="50%" style="height: 500px;">
+                        <div class="form-group" >
+                            <label for="sch-content">Văn bản liên quan</label>
+                            <input class="form-control" id="sch-content" name="sch-content" aria-describedby="help-content" placeholder="Nhập nội dung tìm kiếm">
+                            <button type="button" onclick="search_relation()" class="btn btn-primary" style="margin-top: 15px;">Tra cứu</button>
+                        </div>
+                        <div id="wrap-table" style="height: 300px; overflow-y: scroll; display: none;">
+                            <table class="table" id="dataTable">
+                            </table>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="form-group">
+                            <label for="loai-dt">Loại đối tượng:</label>
+                            <select class="form-control" id="loai-dt" onchange="genIdVb()">
+                                <option value="0"></option>
+                                <option value="DN">Doanh nghiệp</option>
+                                <option value="CN">Cá nhân</option>
+                                <option value="TC">Tổ chức</option>
+                                <option value="HTX">Hợp tác xã</option>
+                            </select>
+                            <label for="loai-st">Loại sắc thuế:</label>
+                            <select class="form-control" id="loai-st" onchange="genIdVb()">
+                                <option value="0"></option>
+                                <option value="TNDN">Thuế thu nhập doanh nghiệp</option>
+                                <option value="TNCN">Thuế thu nhập cá nhân</option>
+                                <option value="GTGT">Thuế giá trị gia tăng</option>
+                                <option value="PLP">Phí, lệ phí</option>
+                                <option value="TTDB">Thuế tiêu thụ đặc biệt</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="id-vb">Mã văn bản:</label>
+                            <input class="form-control" id="id-vb" name="id-vb" aria-describedby="help-id" placeholder="Mã tự sinh" readonly="readonly">
+                        </div>
+                        <div class="form-group" >
+                            <label for="content">Nội dung</label>
+                            <textarea  rows="8" cols="50" class="form-control" id="content" name="content" placeholder="Nội dung văn bản"></textarea>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td align="right"><button type="button" onclick="return true;" class="btn btn-primary" >Lưu thông tin</button></td>
+                </tr>
+            </table>
+    </div>
+<script type="text/javascript">
+    $(document).ready(function(){
+        $(document).on("dblclick","#dataTable tr",function() {
+            var reference = $(this).find("h4").eq(0).children("em").text();
+            var content = $(this).find("h4").eq(1).text();
+
+            if(typeof reference == 'undefined' || reference == '' || typeof content == 'undefined' || content == ''){
+              return;
+            }
+
+            var content_text = $("#content");
+            if(content_text.val() != null && content_text.val() != '')
+                content_text.val(content_text.val() + " " + reference + ": " + content);
+            else
+                content_text.val(reference + ": " + content);
+      });
+    });
+
+    function search_relation(){
+        var table = $("#dataTable");
+        table.empty();
+        for(var i in dataTable){
+            table.append("<tr><td class='content-text'><h3><strong>" + dataTable[i]["title"] + "</strong></h3><h4><em>" + dataTable[i]["reference"]
+                + "</em></h4><h4>" + dataTable[i]["content"] + "</h4></td></tr>");
+
+            console.log("Add data!");
+        }
+
+        $("#wrap-table").css("display", "block");
+        // table.css({'height':'300px', 'overflow':'scroll'});
+    }
+
+    function genIdVb(){
+        var ranNum = Math.floor(Math.random()*(9999 - 1000 + 1) + 1000);
+        var dtSelected = $('#loai-dt').find(":selected").val();
+        var stSelected = $('#loai-st').find(":selected").val();
+
+        $("#id-vb").val(dtSelected + "_" + stSelected + "_" + ranNum);
+    }
+</script>
+{% include 'footer.html' %}

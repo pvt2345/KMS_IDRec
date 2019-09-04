@@ -1,0 +1,30 @@
+
+{% include 'header.html' %}
+    <div class="container">
+        <div class="table-responsive">
+            <form method="post" action="/topic/update">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Topic tự gán</th>
+                            <th>Các từ khóa</th>
+                            <th>Đặt tên Topic</th>
+                        </tr>
+                        {% set stt=1 %}
+                        {% for row in topics %}
+                            <tr>
+                                <th>{{ row['topic'] }}</th>
+                                <th>{{ row['words'] }}</th>
+                                <th>
+                                    <input class="form-control" name="topicName{{row['id']}}" placeholder="Nhập tên topic">
+                                </th>
+                            </tr>
+                        {% endfor %}
+                    </thead>
+                </table>
+                <button type="submit" class="btn btn-primary">Cập nhật topic</button>
+             </form>
+        </div>
+    </div>
+
+{% include 'footer.html' %}

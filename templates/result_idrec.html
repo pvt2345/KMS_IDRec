@@ -1,0 +1,48 @@
+{% include 'header.html' %}
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <h3>Kết quả:</h3>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <table class="table-bordered table-striped table-hover  ">
+                <tbody>
+                <tr>
+                {% if filename %}
+                    <td class="col-lg-6 col-md-6 col-sm-12 col-xs-12 image-contain"><img src="static/upload/{{filename}}" width=512/></td>
+                {% else %}
+                    <td class="col-lg-6 col-md-6 col-sm-12 col-xs-12 image-contain"><img src="static/logo/cccd.jpg" width=512/></td>
+                {% endif %}
+
+                {% if detected_data %}
+                <td class="col-lg-6">
+                    <p> Họ và tên:  {{detected_data['name']}}</p>
+                    <p> Số CMND:  {{detected_data['id']}}</p>
+                    <p> Ngày sinh:  {{detected_data['date']}}</p>
+                    <p> Giới tính:  {{detected_data['gender']}}</p>
+                    <p> Quốc tịch: {{detected_data['nationality']}}</p>
+                    <p> Nguyên quán: {{detected_data['hometown']}}</p>
+                    <p> Địa chỉ:  {{detected_data['address']}}</p>
+                    <p> Có giá trị đến: {{detected_data['expiry']}}</p>
+                </td>
+                {% else %}
+                <td class="col-lg-6">
+                    <p> Họ và tên:  Nguyễn Văn A</p>
+                    <p> Số CMND:  0123456789</p>
+                    <p> Ngày sinh:  01/02/1990</p>
+                    <p> Giới tính:  Nam</p>
+                    <p> Quốc tịch: Việt Nam</p>
+                    <p> Nguyên quán: Cầu Giấy, Hà Nội</p>
+                    <p> Địa chỉ:  Cầu Giấy, Hà Nội</p>
+                    <p> Có giá trị đến: 01/02/2023</p>
+                </td>
+                {% endif %}
+                </tr>
+                </tbody>
+            </table>
+            </div>
+        </div>
+
+
+{% include 'footer.html' %}

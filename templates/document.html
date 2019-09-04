@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <!--<link rel="stylesheet" href="https://cmcsoft.com/image/data/logo.png">-->
+    <!--<link rel="icon" href="https://cmcsoft.com/image/data/logo.png">-->
+    <link rel="stylesheet" href="https://i.imgur.com/dnN8R4s.png">
+    <link rel="icon" href="https://i.imgur.com/dnN8R4s.png">
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet">
+    <title>Phân loại chủ đề văn bản</title>
+</head>
+<body>
+    {% include 'header.html' %}
+    <div class="container">
+        <div class="table-responsive">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Số văn bản</th>
+                        <th>Trích yếu nội dung</th>
+                        <th>Tên Topic</th>
+                    </tr>
+                    {% set stt=1 %}
+                    {% for doc in documents %}
+                    <tr>
+                        <th>{{ doc['so_van_ban'] }}</th>
+                        <th>{{ doc['trich_yeu_noi_dung'] }}</th>
+                        <th>{{ doc['topic'] }}</th>
+                    </tr>
+                    {% endfor %}
+                </thead>
+            </table>
+        </div>
+    </div>
+    {% include 'footer.html' %}
+</body>
+</html>

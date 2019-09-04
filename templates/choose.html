@@ -1,0 +1,33 @@
+{% include 'header.html' %}
+    <div class="row">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <h3>Chọn 1 trong 3 ảnh sau: </h3>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <table class="table-bordered table-striped table-hover  ">
+                <tbody>
+                    <tr>
+                        <td class="col-lg-4">
+                            <a href="{{url_for('get_result')}}">
+                                <img src="static/logo/red.jpg" width=341/>
+                            </a>
+                        </td>
+                        <td class="col-lg-4">
+                            <a href="{{url_for('get_result')}}">
+                                <img src="static/logo/blue.jpg" width=341/>
+                            </a>
+                        </td>
+                        <td class="col-lg-4">
+                            <a href="{{url_for('get_result')}}">
+                                <img src="static/logo/green.jpg" width=341/>
+                            </a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+{% include 'footer.html' %}

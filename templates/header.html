@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="https://i.imgur.com/dnN8R4s.png">
+    <link rel="icon" href="https://i.imgur.com/dnN8R4s.png">
+    <!--<link rel="stylesheet" href="http://cmccist.com/wp-content/uploads/2018/12/Logo-CIST-blue.png">-->
+    <!--<link rel="icon" href="http://cmccist.com/wp-content/uploads/2018/12/Logo-CIST-blue.png">-->
+    <!--<link rel="stylesheet" href="../static/css/custom.css">-->
+    <link rel="stylesheet" href="{{url_for('static', filename='css/custom.css')}}">
+    <!--<link rel="stylesheet" href="static/css/bootstrap-3.2.min.css">-->
+    <!--<link rel="stylesheet" href="static/css/bootstrap-theme-3.2.min.css">-->
+    <!--<script src="static/js/jquery-1.11.2.js"></script>-->
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+    <!--<script src="../static/js/results.js"></script>-->
+    <script src="{{url_for('static', filename='js/results.js')}}"></script>
+    <title>Hệ thống quản lý tri thức C-KMS</title>
+</head>
+<body>
+
+<div class="container">
+    <div style="background:transparent !important" class="jumbotron">
+        <div style="font-family: 'Times New Roman', cursive;">
+            <p>
+                <!--<img src="http://cmccist.com/wp-content/uploads/2018/12/Logo-CIST-blue.png" class="float-left" >-->
+                <!--<img src="https://i.imgur.com/dnN8R4s.png" class="float-left" >-->
+                <img src="static/images/logo.png" class="float-left"/>
+                <label><font size="6">Hệ thống quản lý tri thức C-KMS</font></label>
+            </p>
+        </div>
+    </div>
+    <nav class="navbar navbar-inverse">
+        <ul class="nav navbar-nav" id="nav-tab">
+            <li class="active" id="tra_cuu"><a href="{{ url_for('index') }}">Tra cứu văn bản pháp quy</a></li>
+            <li><a href="{{ url_for('extract_request') }}">Bóc tách văn bản</a></li>
+            <!--<li><a href="{{ url_for('topic') }}">Phân loại văn bản</a></li>-->
+            <!--<li><a href="{{ url_for('editor') }}">Soạn thảo văn bản</a></li>-->
+            <!--<li><a href="{{ url_for('output_vi') }}">Văn bản KHCN (vi)</a></li>-->
+            <!--<li><a href="{{ url_for('output_en') }}">Văn bản KHCN (en)</a></li>-->
+        </ul>
+    </nav>
+</div>
+
+<script type="text/javascript">
+    $(document).ready(function(){
+        var curTab = "{{tabs}}";
+        if(curTab == 2){
+            $("#nav-tab").find("li").removeClass("active");
+            $("#nav-tab").find("li").eq(1).addClass("active");
+        }
+        else if(curTab == 3){
+            $("#nav-tab").find("li").removeClass("active");
+            $("#nav-tab").find("li").eq(2).addClass("active");
+        }
+        else if(curTab == 4){
+            $("#nav-tab").find("li").removeClass("active");
+            $("#nav-tab").find("li").eq(3).addClass("active");
+        }
+        else if(curTab == 5){
+            $("#nav-tab").find("li").removeClass("active");
+            $("#nav-tab").find("li").eq(4).addClass("active");
+        }
+    });
+</script>

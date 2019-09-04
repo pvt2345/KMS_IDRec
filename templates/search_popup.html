@@ -1,0 +1,83 @@
+
+{% include 'header.html' %}
+    <div class="container">
+        <form action="/search_popup/results" method="post">
+            <div class="input-group">
+                <input type="hidden" value="1" name="page" />
+                <input type="hidden" value="{{content_text}}" name="content_text" />
+                <input type="text" class="form-control input-lg" name="input" placeholder="Nhập từ khóa ...."  value="{%if(keywords)%}{{keywords}}{%endif%}" autofocus>
+                <div class="input-group-btn">
+                    <button class="btn btn-primary btn-lg" type="submit">
+                      <i class="glyphicon glyphicon-search"></i>
+                    </button>
+                </div>
+            </div>
+        </form>
+
+        <table class="table" style="height: 400px" id="resultsTable">
+            <thead>
+            {% for doc in results %}
+                <tr>
+                    <td class="content-text">
+                        <h3><strong>{{ doc[0] }}</strong></h3>
+                        <h4><em>{{ doc[1] }}</em></h4>
+                        <h4 class="highlight">{{ doc[2] }}</h4>
+                    </td>
+                </tr>
+            {% endfor %}
+            </thead>
+        </table>
+
+        <nav>
+        {% if(totals) %}
+            <form id="paging" method="post" action="/search_popup/results/page">
+                <input type="hidden" name="input" value="{%if(keywords)%}{{keywords}}{%endif%}" />
+                <ul class="pagination">
+                {% for i in range (1, totals) %}
+                    <li class="page-item"><a class="page-link" href="/search_popup/results/page/{{i}}" >{{ i }}</a></li>
+                 {% endfor %}
+                </ul>
+            </form>
+        {% endif %}
+        </nav>
+    </div>
+
+    <script type="text/javascript">
+    var keywords = "{{keywords}}";
+    arrW = keywords.split(" ");
+    var allTagHilight = document.getElementsByClassName("highlight");
+    for(var index = 0; index < allTagHilight.length; index ++){
+        var tagH = allTagHilight[index];
+        var contentTag = tagH.innerText;
+        if(contentTag.indexOf(keywords)!= -1){
+            var strRep = "<mark>" + keywords + "</mark>";
+            contentTag = contentTag.replace(keywords , strRep);
+            tagH.innerHTML = contentTag;
+        }else{
+            for(var i in arrW){
+                word = arrW[i];
+                if(contentTag.indexOf(word)!= -1){
+                    var wordRep = "<mark>" + word + "</mark>";
+                    contentTag = contentTag.replace(word , wordRep);
+                }
+            }
+            tagH.innerHTML = contentTag;
+        }
+    }
+    </script>
+<script type="text/javascript">
+    $(document).ready(function(){
+        $(document).on("dblclick","#resultsTable tr",function() {
+            var reference = $(this).find("h4").eq(0).children("em").text();
+            // var content_text = $("input[name='content_text']").val();
+            console.log("reference: " + reference);
+            if(typeof reference == 'undefined' || reference == ''){
+              return;
+            }
+
+            opener.setData(reference);
+	        window.close();
+      });
+    });
+</script>
+    {% include 'footer.html' %}

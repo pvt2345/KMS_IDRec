@@ -1,0 +1,117 @@
+{% include 'header_extract.html' %}
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+
+<div class="container">
+  <!--<button type="button" class="btn btn-light"> Upload File </button>-->
+    <!--<div class="dropdown">-->
+  <!--<button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">-->
+    <!--Dropdown button-->
+  <!--</button>-->
+  <!--<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">-->
+    <!--<p class="dropdown-item" >Action</p>-->
+    <!--<p class="dropdown-item" >Another action</p>-->
+    <!--<p class="dropdown-item" >Something else here</p>-->
+  <!--</div>-->
+  <form class="form-inline" method=post enctype=multipart/form-data>
+      <!--<label for="file-upload" class="custom-file-upload">-->
+        <!--<i class="fa fa-cloud-upload"></i> Custom Upload-->
+      <!--</label>-->
+      <!--<input id="file-upload" type="file"/>-->
+      <input type=file class="form-control" name=file>
+      <input type=submit class="form-control" value=Extract>
+  </form>
+</div>
+{% if(data) %}
+<div class="container">
+    <!--<p>{{info}}</p>-->
+    <div class="table-responsive">
+            <table class="table">
+                <thead>
+                <tr>
+                    <h1>Văn bản: {{data['Loại văn bản']}} {{data['Số văn bản']}} </h1>
+                </tr>
+                <tr>
+                    <h3>➢ Nơi ban hành: {{data['Nơi ban hành']}} </h3>
+                </tr>
+                <tr>
+                    <h3>➢ Số văn bản: {{data['Số văn bản']}} </h3>
+                </tr>
+                <tr>
+                    <h3>➢ Địa điểm: {{data['Địa điểm']}} </h3>
+                </tr>
+                <tr>
+                    <h3>➢ Thời gian: {{data['Thời gian']}} </h3>
+                </tr>
+                <tr>
+                    <h3>➢ Loại văn bản: {{data['Loại văn bản']}} </h3>
+                </tr>
+                <tr>
+                    <h3>➢ Trích yếu nội dung: {{data['Trích yếu nội dung']}} </h3>
+                </tr>
+                <tr>
+                    <h3>➢ Các căn cứ: </h3>
+                </tr>
+                {% for item in data['Căn cứ'] %}
+                <tr>
+                    <h4> - {{item}} </h4>
+                </tr>
+                {% endfor %}
+                {% if data['Phụ lục'] != -1 %}
+                <tr>
+                    <h3>➢ Phụ lục: {{data['Phụ lục']}}</h3>
+                </tr>
+                {% else %}
+                <tr>
+                    <h3>➢ Văn bản không gồm phụ lục</h3>
+                </tr>
+                {% endif %}
+                {% if data['Quy chế'] != -1 %}
+                <tr>
+                    <h3>➢ Quy chế: {{data['Quy chế']}}</h3>
+                </tr>
+                {% else %}
+                <tr>
+                    <h3>v\➢ Văn bản không gồm quy chế</h3>
+                </tr>
+                {% endif %}
+                <tr>
+                    <h3>➢ Yêu cầu của: {{data['Yêu cầu']}}</h3>
+                </tr>
+                <tr>
+                    <h3>➢ Các nơi nhận: </h3>
+                </tr>
+                {% for item in data['Nơi nhận'] %}
+                <tr>
+                    <h4> - {{item}} </h4>
+                </tr>
+                {% endfor %}
+                <tr>
+                    <h3>➢ Nội dung: </h3>
+                </tr>
+                {% for item in content.splitlines() %}
+                <tr>
+                    <h4> {{item}} </h4>
+                </tr>
+                {% endfor %}
+            </table>
+        <form>
+            <a href=# id=insert><button class='btn btn-default'>Lưu vào database</button></a>
+        </form>
+    </div>
+</div>
+
+<script type=text/javascript>
+        $(function() {
+          $('a#insert').bind('click', function() {
+            $.getJSON('/insert_todb',
+                function(data) {
+              //do nothing
+            });
+            alert("Đã lưu văn bản {{data['Số văn bản']}} vào database")
+            return false;
+          });
+        });
+</script>
+
+{% endif %}
+{% include 'footer.html' %}

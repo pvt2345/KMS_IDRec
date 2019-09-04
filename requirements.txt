@@ -1,0 +1,15 @@
+pytesseract
+opencv-python
+Pillow
+pdf2image
+numpy
+comtypes
+flask
+pymysql
+sqlalchemy
+PyQt5
+underthesea
+pandas
+PyPDF2
+Flask-MySQL
+pymongo

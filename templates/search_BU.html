@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Pacifico">
+  <link rel="icon" href="http://obj-cache.cloud.ruanbekker.com/favicon.ico">
+  <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet">
+  <script src="../static/js/jquery-1.11.2.js"></script>
+
+
+  <title>Hệ thống quản lý tri thức C-KMS</title>
+
+</head>
+<body>
+
+  <div class="container">
+    <div style="background:transparent !important" class="jumbotron">
+      <div style="font-family: 'Pacifico', cursive;">
+        <p>
+          <img src="https://i.imgur.com/dnN8R4s.png" class="float-left" >
+          <label><font size="6">Hệ thống quản lý tri thức C-KMS</font></label>
+        </p>
+      </div>
+    </div>
+
+    <form>
+      <div class="input-group">
+        <input type="text" class="form-control input-lg" name="input" placeholder="Nhập từ khóa ..." autofocus>
+        <div class="input-group-btn">
+          <button class="btn btn-primary btn-lg" onclick="actionSearch()">
+            <i class="glyphicon glyphicon-search"></i>
+          </button>
+        </div>
+      </div>
+    </form>
+
+    <br><br>
+      <footer class="footer">
+        <p>&copy; 2018 CMCSoftware </p>
+      </footer>
+
+      </div>
+    </div>
+  </body>
+  <script>
+    function actionSearch() {
+      var keywords = $('input[name=input]').val();
+      // alert(keywords);
+      $.ajax({
+        method: "POST",
+        url: "/search/results",
+        data: {'keywords': keywords},
+        cache: false
+    });
+    }
+
+  </script>
+
+</html>

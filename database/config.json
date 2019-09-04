@@ -1,0 +1,37 @@
+{
+  "config": {
+    "log": "debug"
+  },
+  "source" : {
+    "file": { "path": "D:/Documents/GitHub/TextMining/database/Output_2.json" }
+  },
+  "extractor" : {
+    "json": {}
+  },
+  "transformers" : [
+    { "merge": { "joinFieldName": "SVB", "lookup": "VanBan.SVB" } },
+    { "vertex": { "class": "VanBan"} },
+    { "edge": {
+      "class": "Lienket",
+      "joinFieldName": "VBLK",
+      "lookup": "VanBan.SVB",
+      "unresolvedLinkAction": "CREATE"
+    } }
+  ],
+  "loader" : {
+    "orientdb": {
+      "dbURL": "plocal:D:/Programs/orientdb_v2.2.36/databases/mydemo",
+      "dbUser": "admin",
+      "dbPassword": "admin",
+      "dbAutoDropIfExists": true,
+      "dbAutoCreate": true,
+      "standardElementConstraints": false,
+      "tx": false,
+      "wal": false,
+      "batchCommit": 1000,
+      "dbType": "graph",
+      "classes": [{"name": "VanBan", "extends":"V"}, {"name": "Lienket", "extends":"E"}],
+      "indexes": [{"class":"VanBan", "fields":["SVB:string"], "type":"UNIQUE_HASH_INDEX" }]
+    }
+  }
+}

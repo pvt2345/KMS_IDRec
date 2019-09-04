@@ -1,0 +1,64 @@
+
+{% include 'header.html' %}
+    <div class="container">
+        <form action="/search-content" method="post" id="form-editor">
+            <div class="form-group" >
+                <label for="sch-content">Văn bản liên quan</label>
+                <input class="form-control" id="sch-content" name="sch-content" aria-describedby="help-content" placeholder="Nhập nội dung tìm kiếm">
+                <button type="submit" class="btn btn-primary" style="margin-top: 15px;">Tra cứu</button>
+                <!--<button onclick="searchPopup()" class="btn btn-primary" style="margin-top: 15px;">Tra cứu văn bản</button>-->
+            </div>
+            <div class="form-group">
+                <label for="loai-dt">Loại đối tượng:</label>
+                <select class="form-control" id="loai-dt" onchange="genIdVb()">
+                    <option value="0"></option>
+                    <option value="DN">Doanh nghiệp</option>
+                    <option value="CN">Cá nhân</option>
+                    <option value="TC">Tổ chức</option>
+                    <option value="HTX">Hợp tác xã</option>
+                </select>
+                <label for="loai-st">Loại sắc thuế:</label>
+                <select class="form-control" id="loai-st" onchange="genIdVb()">
+                    <option value="0"></option>
+                    <option value="TNDN">Thuế thu nhập doanh nghiệp</option>
+                    <option value="TNCN">Thuế thu nhập cá nhân</option>
+                    <option value="GTGT">Thuế giá trị gia tăng</option>
+                    <option value="PLP">Phí, lệ phí</option>
+                    <option value="TTDB">Thuế tiêu thụ đặc biệt</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="id-vb">Mã văn bản:</label>
+                <input class="form-control" id="id-vb" name="id-vb" aria-describedby="help-id" placeholder="Mã tự sinh" readonly="readonly">
+            </div>
+            <div class="form-group" >
+                <label for="content">Nội dung</label>
+                <textarea  rows="5" cols="50" class="form-control" id="content" name="content" placeholder="Nội dung văn bản">{{return_data}}</textarea>
+            </div>
+
+            <button onclick="return true;" class="btn btn-primary" >Lưu thông tin</button>
+        </form>
+    </div>
+<script type="text/javascript">
+    function searchPopup(){
+        var sch_content = $("#sch-content").val();
+        var url = "{{url_for('search_popup')}}";
+        url = url + "?sch_content=" + sch_content;
+        window.open(url);
+    }
+
+    function setData(values){
+        var content = $("#content");
+        content.concat(values);
+        $("#content").html(content);
+    }
+
+    function genIdVb(){
+        var ranNum = Math.floor(Math.random()*(9999 - 1000 + 1) + 1000);
+        var dtSelected = $('#loai-dt').find(":selected").val();
+        var stSelected = $('#loai-st').find(":selected").val();
+
+        $("#id-vb").val(dtSelected + "_" + stSelected + "_" + ranNum);
+    }
+</script>
+{% include 'footer.html' %}

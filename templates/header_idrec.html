@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="viewport" content="width = device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <title>C-IDRec</title>
+    <style>
+        .text-center{
+            text-align: center
+        }
+        .image-contain{
+           padding-left: 10px;
+           padding-bottom: 20px;
+           padding-right: 20px;
+           padding-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="row text-center">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" >
+                <img src="static/logo/download.png"/>
+                <h2>Hệ thống nhận dạng thông tin từ giấy tờ tùy thân</h2>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <form class="form-inline" method=post enctype=multipart/form-data>
+                    <input type=file class="form-control" name=file>
+                    <input type=submit class="form-control" value=Extract>
+                </form>
+            </div>
+        </div>
